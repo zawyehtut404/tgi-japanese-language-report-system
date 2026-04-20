@@ -1,38 +1,196 @@
-.App {
-  text-align: center;
+/* Google Font တစ်ခုခု သုံးချင်ရင် ဒါလေး ထည့်ထားနိုင်ပါတယ် */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  background-color: #f4f7f6;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.form-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 700px;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+.title {
+  text-align: center;
+  color: #1e293b;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.section {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 25px;
+}
+
+/* မျဉ်းတားမပါတဲ့ Section (နောက်ဆုံး Section အတွက်) */
+.section:last-of-type {
+  border-bottom: none;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: #4338ca;
+}
+
+/* အတန်းအမျိုးအစား နှင့် အချိန်ရွေးရန် Grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; /* Dropdown နှစ်ခုကြား ခြားထားမယ် */
+  margin-bottom: 10px;
+}
+
+/* Chapter List Area */
+.chapter-list {
+  max-height: 450px;
+  overflow-y: auto;
+  padding-right: 12px;
+  margin-top: 15px;
+}
+
+/* Scrollbar ကို Modern ဖြစ်အောင် လုပ်ခြင်း */
+.chapter-list::-webkit-scrollbar {
+  width: 6px;
+}
+.chapter-list::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.chapter-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.chapter-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: transform 0.2s;
+}
+
+.chapter-box:hover {
+  border-color: #cbd5e1;
+}
+
+.chapter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.chapter-row strong {
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+/* 1 Chapter အောက်က ၈ ချက်ကို ၃ ခုစီ စီထားတာ */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.checkbox-label {
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #64748b;
+  user-select: none;
+}
+
+.checkbox-label input {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  accent-color: #4338ca; /* Checkbox အရောင်ကို Primary Color ပြောင်းမယ် */
+}
+
+.btn-small {
+  background: #eef2ff;
+  border: none;
+  color: #4338ca;
+  padding: 5px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-small:hover {
+  background: #e0e7ff;
+}
+
+.submit-btn {
+  width: 100%;
+  background: #4338ca;
   color: white;
+  padding: 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  box-shadow: 0 4px 6px -1px rgba(67, 56, 202, 0.2);
 }
 
-.App-link {
-  color: #61dafb;
+.submit-btn:hover {
+  background: #3730a3;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(67, 56, 202, 0.3);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Mobile အတွက် responsive ဖြစ်အောင် */
+@media (max-width: 600px) {
+  .grid-2 {
+    grid-template-columns: 1fr; /* ဖုန်းမှာဆိုရင် တစ်ခုချင်းစီ အပေါ်အောက် ပြမယ် */
+    gap: 0;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .task-grid {
+    grid-template-columns: repeat(2, 1fr); /* ဖုန်းမှာဆိုရင် ၂ ခုစီပဲ ပြမယ် */
   }
 }
