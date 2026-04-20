@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 body {
   /* နူးညံ့တဲ့ background gradient */
@@ -33,6 +33,8 @@ body {
   background: linear-gradient(to right, #4338ca, #6366f1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
   margin-top: 0;
   margin-bottom: 35px;
   font-size: 2rem;
@@ -134,11 +136,36 @@ h3::before {
   border-color: #c7d2fe;
 }
 
+/* === ဒီအပိုင်းကို အဓိက ပြင်ထားပါတယ် === */
+.chapter-row {
+  display: flex;
+  justify-content: space-between; /* စာသားကို ဘယ်၊ ခလုတ်ကို ညာ တွန်းထုတ်မယ် */
+  align-items: center; /* အပေါ်အောက် အလယ်ညှိမယ် */
+  margin-bottom: 15px;
+  width: 100%; /* Box အပြည့် ယူမယ် */
+}
+
 .chapter-row strong {
   color: #1e293b;
   font-size: 1.15rem;
   font-weight: 700;
+  margin: 0; /* Margin တွေကို ဖြုတ်ထားမယ် */
 }
+
+.btn-small {
+  background: #4338ca;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(67, 56, 202, 0.2);
+  /* ဘယ်ဘက် Margin ကို auto ပေးပြီး ညာဘက်ကို တွန်းပို့စရာ မလိုတော့ပါ */
+}
+/* =================================== */
 
 .task-grid {
   display: grid;
@@ -154,6 +181,9 @@ h3::before {
   font-size: 0.9rem;
   font-weight: 500;
   color: #475569;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
   transition: color 0.2s;
 }
 
@@ -166,16 +196,6 @@ h3::before {
   height: 18px;
   margin-right: 10px;
   accent-color: #4338ca;
-}
-
-.btn-small {
-  background: #4338ca;
-  color: white;
-  padding: 6px 16px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.2s;
-  box-shadow: 0 2px 4px rgba(67, 56, 202, 0.2);
 }
 
 .btn-small:hover {
@@ -207,4 +227,10 @@ h3::before {
   .grid-2 { grid-template-columns: 1fr; gap: 0; }
   .task-grid { grid-template-columns: repeat(2, 1fr); }
   .form-card { padding: 25px; }
+  
+  /* ဖုန်းမှာ စာသားတွေ မဆံ့ရင် အောက်ဆင်းသွားအောင် */
+  .chapter-row {
+    flex-wrap: wrap; 
+    gap: 10px;
+  }
 }
