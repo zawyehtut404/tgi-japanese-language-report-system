@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  MINNA_TASKS, N5_CHAPTERS, KANJI_CHAPTERS, TIME_SLOTS,
-  N3_GOI_P1, N3_GOI_P2, GOI_TASKS, N3_CHOUKAI, N3_BUNPOU, N3_DOKKAI, N3_PAST_PAPERS 
+  MINNA_TASKS, N5_CHAPTERS, TIME_SLOTS, 
+  N3_GOI_P1, N3_GOI_P2, GOI_TASKS, N3_CHOUKAI, N3_BUNPOU, N3_DOKKAI 
 } from './data/chapters';
 import './App.css';
 
@@ -173,7 +173,6 @@ function App() {
                         </label>
                       ))}
                     </div>
-                    {/* 11-12 Unit အောက်မှာ Final checkbox ကို တိုက်ရိုက်ထည့်ထားခြင်း */}
                     {item.name === "11-12 Unit" && (
                       <div style={{ marginTop: '10px', borderTop: '1px solid #eee', paddingTop: '10px' }}>
                         <label className="checkbox-label">
