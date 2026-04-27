@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  MINNA_TASKS, N5_CHAPTERS, TIME_SLOTS, 
+  MINNA_TASKS, N5_CHAPTERS, KANJI_CHAPTERS, TIME_SLOTS, 
   N3_GOI_P1, N3_GOI_P2, GOI_TASKS, N3_CHOUKAI, N3_BUNPOU, N3_DOKKAI 
 } from './data/chapters';
 import './App.css';
@@ -93,21 +93,40 @@ function App() {
 
         {/* N5 / N4 Content */}
         {(formData.level === 'N5' || formData.level === 'N4') && (
-          <div className="section">
-            <h3>みんなの日本語</h3>
-            <div className="chapter-list">
-              {N5_CHAPTERS.map(ch => (
-                <div key={ch} className="chapter-box">
-                  <div className="chapter-row"><strong>Chapter {ch}</strong><button onClick={() => handleN5SelectAll('minna', ch, MINNA_TASKS)} className="btn-small">All</button></div>
-                  <div className="task-grid">
-                    {MINNA_TASKS.map(task => (
-                      <label key={task} className="checkbox-label"><input type="checkbox" checked={minnaProgress[ch]?.[task] || false} onChange={() => handleN5TaskToggle('minna', ch, task)} /> {task}</label>
-                    ))}
+          <>
+            <div className="section">
+              <h3>みんなの日本語</h3>
+              <div className="chapter-list">
+                {N5_CHAPTERS.map(ch => (
+                  <div key={ch} className="chapter-box">
+                    <div className="chapter-row"><strong>Chapter {ch}</strong><button onClick={() => handleN5SelectAll('minna', ch, MINNA_TASKS)} className="btn-small">All</button></div>
+                    <div className="task-grid">
+                      {MINNA_TASKS.map(task => (
+                        <label key={task} className="checkbox-label"><input type="checkbox" checked={minnaProgress[ch]?.[task] || false} onChange={() => handleN5TaskToggle('minna', ch, task)} /> {task}</label>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+
+            {/* Kanji Section - အခုမှ ပေါင်းထည့်ထားတာပါ */}
+            <div className="section">
+              <h3>漢字 (Kanji)</h3>
+              <div className="chapter-list">
+                {KANJI_CHAPTERS.map(ch => (
+                  <div key={`kanji-${ch}`} className="chapter-box">
+                    <div className="chapter-row"><strong>Chapter {ch}</strong><button onClick={() => handleN5SelectAll('kanji', ch, ["課", "練習"])} className="btn-small">All</button></div>
+                    <div className="task-grid">
+                      {["課", "練習"].map(task => (
+                        <label key={task} className="checkbox-label"><input type="checkbox" checked={kanjiProgress[ch]?.[task] || false} onChange={() => handleN5TaskToggle('kanji', ch, task)} /> {task}</label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
         )}
 
         {/* N3 Content */}
