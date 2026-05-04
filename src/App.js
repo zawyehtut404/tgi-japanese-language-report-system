@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { 
   MINNA_TASKS, N5_CHAPTERS, KANJI_CHAPTERS, TIME_SLOTS, 
-  N3_GOI_P1, N3_GOI_P2, GOI_TASKS, N3_CHOUKAI, N3_BUNPOU, N3_DOKKAI 
+  N3_GOI_P1, N3_GOI_P2, GOI_TASKS, N3_CHOUKAI, N3_BUNPOU, N3_DOKKAI,
+  N3_PAST_PAPERS 
 } from './data/chapters';
 import './App.css';
 
@@ -62,7 +63,7 @@ function App() {
       <div className="form-card">
         <h2 className="title">TGI Japanese Report Form</h2>
 
-        {/* Basic Info */}
+        {/* Basic Info Section */}
         <div className="section">
           <label>Sensei အမည်</label>
           <input className="input-field" placeholder="Sensei အမည် ထည့်ပါ" onChange={(e) => setFormData({...formData, senseiName: e.target.value})} />
@@ -110,7 +111,6 @@ function App() {
               </div>
             </div>
 
-            {/* Kanji Section - အခုမှ ပေါင်းထည့်ထားတာပါ */}
             <div className="section">
               <h3>漢字 (Kanji)</h3>
               <div className="chapter-list">
@@ -132,27 +132,50 @@ function App() {
         {/* N3 Content */}
         {formData.level === 'N3' && (
           <div className="n3-section">
+            
+            {/* Goi Section (Updated with Range Logic) */}
             <div className="section">
               <h3>N3 語彙 (1部 & 2部)</h3>
               <div className="chapter-list">
                 <p><strong>[ 1部: 1-21課 ]</strong></p>
-                {N3_GOI_P1.map(ch => (
-                  <div key={`p1-${ch}`} className="chapter-box">
-                    <div className="chapter-row"><strong>{ch} 課</strong><button onClick={() => handleN3SelectAll('goi1', ch, GOI_TASKS)} className="btn-small">All</button></div>
+                {N3_GOI_P1.map((group) => (
+                  <div key={group.range} className="chapter-box">
+                    <div className="chapter-row">
+                      <strong>{group.range}</strong>
+                      <button onClick={() => handleN3SelectAll('goi1', group.range, group.tasks)} className="btn-small">All</button>
+                    </div>
                     <div className="task-grid">
-                      {GOI_TASKS.map(t => (
-                        <label key={t} className="checkbox-label"><input type="checkbox" checked={n3Progress.goi1?.[ch]?.[t] || false} onChange={() => handleN3Toggle('goi1', ch, t)} /> {t}</label>
+                      {group.tasks.map((task) => (
+                        <label key={task} className="checkbox-label">
+                          <input 
+                            type="checkbox" 
+                            checked={n3Progress.goi1?.[group.range]?.[task] || false} 
+                            onChange={() => handleN3Toggle('goi1', group.range, task)} 
+                          /> 
+                          {task}
+                        </label>
                       ))}
                     </div>
                   </div>
                 ))}
-                <p><strong>[ 2部: 1-8課 ]</strong></p>
+
+                <p style={{ marginTop: '20px' }}><strong>[ 2部: 1-8課 ]</strong></p>
                 {N3_GOI_P2.map(ch => (
                   <div key={`p2-${ch}`} className="chapter-box">
-                    <div className="chapter-row"><strong>{ch} 課</strong><button onClick={() => handleN3SelectAll('goi2', ch, GOI_TASKS)} className="btn-small">All</button></div>
+                    <div className="chapter-row">
+                      <strong>{ch} 課</strong>
+                      <button onClick={() => handleN3SelectAll('goi2', ch, GOI_TASKS)} className="btn-small">All</button>
+                    </div>
                     <div className="task-grid">
                       {GOI_TASKS.map(t => (
-                        <label key={t} className="checkbox-label"><input type="checkbox" checked={n3Progress.goi2?.[ch]?.[t] || false} onChange={() => handleN3Toggle('goi2', ch, t)} /> {t}</label>
+                        <label key={t} className="checkbox-label">
+                          <input 
+                            type="checkbox" 
+                            checked={n3Progress.goi2?.[ch]?.[t] || false} 
+                            onChange={() => handleN3Toggle('goi2', ch, t)} 
+                          /> 
+                          {t}
+                        </label>
                       ))}
                     </div>
                   </div>
@@ -160,6 +183,29 @@ function App() {
               </div>
             </div>
 
+            {/* Past Papers Section */}
+            <div className="section">
+              <h3>過去問題</h3>
+              <div className="chapter-list">
+                {N3_PAST_PAPERS.map((paper, index) => (
+                  <div key={index} className="chapter-box">
+                    <div className="chapter-row">
+                      <strong>{paper.year} {paper.month}</strong>
+                      <button onClick={() => handleN3SelectAll('pastPapers', index, paper.tasks)} className="btn-small">All</button>
+                    </div>
+                    <div className="task-grid">
+                      {paper.tasks.map(t => (
+                        <label key={t} className="checkbox-label">
+                          <input type="checkbox" checked={n3Progress.pastPapers?.[index]?.[t] || false} onChange={() => handleN3Toggle('pastPapers', index, t)} /> {t}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Choukai Section */}
             <div className="section">
               <h3>N3 聴解</h3>
               <div className="chapter-list">
@@ -176,6 +222,7 @@ function App() {
               </div>
             </div>
 
+            {/* Bunpou Section */}
             <div className="section">
               <h3>N3 文法</h3>
               <div className="chapter-list">
@@ -192,19 +239,12 @@ function App() {
                         </label>
                       ))}
                     </div>
-                    {item.name === "11-12 Unit" && (
-                      <div style={{ marginTop: '10px', borderTop: '1px solid #eee', paddingTop: '10px' }}>
-                        <label className="checkbox-label">
-                          <input type="checkbox" checked={n3Progress.final?.[1]?.['1-12練習'] || false} onChange={() => handleN3Toggle('final', 1, '1-12練習')} /> 
-                          <strong style={{ color: '#4f46e5' }}>1-12 練習 (Final)</strong>
-                        </label>
-                      </div>
-                    )}
                   </div>
                 ))}
               </div>
             </div>
 
+            {/* Dokkai Section */}
             <div className="section">
               <h3>N3 読解</h3>
               <div className="chapter-list task-grid" style={{background: '#f8fafc', padding: '15px', borderRadius: '12px'}}>
@@ -218,9 +258,10 @@ function App() {
           </div>
         )}
 
+        {/* Other Reason Section */}
         <div className="section">
           <label>Other (Reason)</label>
-          <textarea className="input-field" rows="3" placeholder="အကြောင်းပြချက်ရှိက ဖြည့်စွက်ရန်..." onChange={(e) => setFormData({...formData, otherReason: e.target.value})}></textarea>
+          <textarea className="input-field" rows="3" placeholder="အကြောင်းပြချက်ရှိပါက ဖြည့်စွက်ရန်..." onChange={(e) => setFormData({...formData, otherReason: e.target.value})}></textarea>
         </div>
 
         <button className="submit-btn" onClick={() => console.log("Submit:", { ...formData, minnaProgress, kanjiProgress, n3Progress })}>

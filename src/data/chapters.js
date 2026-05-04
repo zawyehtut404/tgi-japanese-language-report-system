@@ -4,7 +4,15 @@ export const KANJI_CHAPTERS = Array.from({ length: 15 }, (_, i) => i + 1);
 
 // --- N3 Data Start ---
 
-export const N3_GOI_P1 = Array.from({ length: 21 }, (_, i) => i + 1);
+// N3_GOI_P1 ကို သင်တောင်းဆိုထားသည့်အတိုင်း Range အလိုက် အုပ်စုဖွဲ့ထားခြင်း
+export const N3_GOI_P1 = [
+  { range: "1 課 to 5 課", tasks: ["1課", "2課", "3課", "4課", "5課"] },
+  { range: "6 課 to 10 課", tasks: ["6課", "7課", "8課", "9課", "10課"] },
+  { range: "11 課 to 14 課", tasks: ["11課", "12課", "13課", "14課"] },
+  { range: "15 課 to 19 課", tasks: ["15課", "16課", "17課", "18課", "19課"] },
+  { range: "20 課 to 21 課", tasks: ["20課", "21課"] }
+];
+
 export const N3_GOI_P2 = Array.from({ length: 8 }, (_, i) => i + 1);
 export const GOI_TASKS = ["課", "練習"];
 
@@ -42,14 +50,14 @@ export const N3_BUNPOU = [
   { name: "A-J Review", tasks: ["A to J", "練習"] }
 ];
 
-export const N3_DOKKAI = Array.from({ length: 42 }, (_, i) => `問題 ${i + 1}`);
+export const N3_DOKKAI = Array.from({ length: 64 }, (_, i) => `問題 ${i + 1}`);
 
 export const N3_PAST_PAPERS = [
-  { year: "Year-1", month: "Month-1", tasks: ["1.文字語彙", "2.文法、読解", "3.聴解"] },
-  { year: "Year-2", month: "Month-2", tasks: ["1.文字語彙", "2.文法、読解", "3.聴解"] },
-  { year: "Year-3", month: "Month-3", tasks: ["1.文字語彙", "2.文法、読解", "3.聴解"] },
-  { year: "Year-4", month: "Month-4", tasks: ["1.文字語彙", "2.文法、読解", "3.聴解"] },
-  { year: "Year-5", month: "Month-5", tasks: ["1.文字語彙", "2.文法、読解", "3.聴解"] }
+  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] },
+  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] },
+  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] },
+  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] },
+  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] }
 ];
 
 // --- N3 Data End ---
