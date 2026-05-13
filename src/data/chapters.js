@@ -13,7 +13,14 @@ export const N3_GOI_P1 = [
   { range: "20 課 to 21 課", tasks: ["20課", "21課"] }
 ];
 
-export const N3_GOI_P2 = Array.from({ length: 8 }, (_, i) => i + 1);
+// N3_GOI_P2 ကို သင်တောင်းဆိုထားသည့်အတိုင်း Range အလိုက် အုပ်စုဖွဲ့ထားခြင်း
+export const N3_GOI_P2 = [
+  { range: "1章 to 2章", tasks: ["1章", "2章"] },
+  { range: "3章 to 4章", tasks: ["3章", "4章"] },
+  { range: "5章 to 6章", tasks: ["5章", "6章"] },
+  { range: "7章 to 8章", tasks: ["7章", "8章"] }
+];
+
 export const GOI_TASKS = ["課", "練習"];
 
 export const N3_CHOUKAI = [
@@ -53,11 +60,16 @@ export const N3_BUNPOU = [
 export const N3_DOKKAI = Array.from({ length: 64 }, (_, i) => `問題 ${i + 1}`);
 
 export const N3_PAST_PAPERS = [
-  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] },
-  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] },
-  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] },
-  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] },
-  { year: "年-。。。。", month: "月-....", tasks: ["1.文字語彙", "2.文法၊ 読解", "3.聴解"] }
+  { year: "2025年", month: "7月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2025年", month: "12月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2024年", month: "7月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2024年", month: "12月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2023年", month: "7月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2023年", month: "12月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2022年", month: "7月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2022年", month: "12月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2021年", month: "12月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
+  { year: "2021年", month: "12月", tasks: ["1.文字語彙", "2.文法・読解", "3.聴解"] },
 ];
 
 // --- N3 Data End ---
