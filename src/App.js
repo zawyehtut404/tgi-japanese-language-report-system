@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Login from './Login';
 import Modal from './Modal';
+import API_BASE_URL from './config';
 import { 
   MINNA_TASKS, N5_CHAPTERS, KANJI_CHAPTERS, TIME_SLOTS, 
   N3_CHOUKAI, N3_BUNPOU, N3_DOKKAI, N3_PAST_PAPERS 
@@ -103,7 +104,7 @@ function App() {
   const fetchReports = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/reports', getHeaders());
+      const response = await axios.get(`${API_BASE_URL}/api/reports`, getHeaders());
       setAllReports(response.data.reports || []);
       setCurrentView('admin');
     } catch (error) {
@@ -117,7 +118,7 @@ function App() {
     if (currentUser.role !== 'admin') return;
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/users', getHeaders());
+      const response = await axios.get(`${API_BASE_URL}/api/users`, getHeaders());
       setAllUsers(response.data.users || []);
       setCurrentView('users');
     } catch (error) {
@@ -141,7 +142,7 @@ function App() {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/reports',
+        `${API_BASE_URL}/api/reports`,
         fullReport,
         getHeaders()
       );
@@ -180,7 +181,7 @@ function App() {
             setModal({ ...modal, isOpen: false });
             try {
               await axios.delete(
-                `http://localhost:5000/api/reports/${id}`,
+                `${API_BASE_URL}/api/reports/${id}`,
                 getHeaders()
               );
               setAllReports(allReports.filter(r => r._id !== id));
@@ -203,14 +204,14 @@ function App() {
     try {
       if (editingUserId) {
         await axios.put(
-          `http://localhost:5000/api/users/${editingUserId}`,
+          `${API_BASE_URL}/api/users/${editingUserId}`,
           newUserData,
           getHeaders()
         );
         showModal('Success', 'User updated successfully.', 'success');
       } else {
         await axios.post(
-          'http://localhost:5000/api/users',
+          `${API_BASE_URL}/api/users`,
           newUserData,
           getHeaders()
         );
@@ -244,7 +245,7 @@ function App() {
             setModal({ ...modal, isOpen: false });
             try {
               await axios.delete(
-                `http://localhost:5000/api/users/${id}`,
+                `${API_BASE_URL}/api/users/${id}`,
                 getHeaders()
               );
               setAllUsers(allUsers.filter(u => u._id !== id));
@@ -298,7 +299,7 @@ function App() {
   const viewReportDetail = async (reportId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/reports/${reportId}`,
+        `${API_BASE_URL}/api/reports/${id}`,
         getHeaders()
       );
       setSelectedReport(response.data.report);

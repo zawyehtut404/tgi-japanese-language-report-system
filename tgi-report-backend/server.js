@@ -11,8 +11,19 @@ const app = express();
 app.use(express.json());
 
 // CORS Setting - Frontend ကနေ လှမ်းခေါ်ရင် Error မတက်အောင် ခွင့်ပြုပေးခြင်း
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://tgi-japanese-language-report-system.vercel.app'
+];
+
 app.use(cors({
-  origin: 'http://localhost:3000', // React App run ထားသည့်နေရာ
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
